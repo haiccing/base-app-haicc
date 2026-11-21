@@ -1,8 +1,8 @@
 {
   "package": "haiccing/base-app-haicc",
-  "content": "f1cca712091ba4b838c2fd1e15b14416292626b99e256e837cc235af4eaf21d4",
+  "content": "246e6db40ec21575c2ce856ac7d344f5f6e87f74c2c7403215decb101d492a82",
   "bare": "v1.36.0",
-  "date": "2026-11-21T03:50:10.482Z",
+  "date": "2026-11-20T11:12:08.088Z",
   "set": "full",
   "ok": true,
   "units": [
@@ -79,8 +79,8 @@
         "total": 18
       },
       "asserts": {
-        "passed": 193,
-        "total": 193
+        "passed": 187,
+        "total": 187
       },
       "failures": []
     },
@@ -88,12 +88,12 @@
       "unit": "/test/modules/pear-full-square/mrepo-base-crud",
       "ok": true,
       "tests": {
-        "passed": 9,
-        "total": 9
+        "passed": 8,
+        "total": 8
       },
       "asserts": {
-        "passed": 80,
-        "total": 80
+        "passed": 76,
+        "total": 76
       },
       "failures": []
     },
@@ -118,8 +118,8 @@
         "total": 9
       },
       "asserts": {
-        "passed": 62,
-        "total": 62
+        "passed": 60,
+        "total": 60
       },
       "failures": []
     },
@@ -140,12 +140,12 @@
       "unit": "/test/modules/pear-full-square/mrepo-base-request",
       "ok": true,
       "tests": {
-        "passed": 21,
-        "total": 21
+        "passed": 18,
+        "total": 18
       },
       "asserts": {
-        "passed": 240,
-        "total": 240
+        "passed": 212,
+        "total": 212
       },
       "failures": []
     },
@@ -183,8 +183,8 @@
         "total": 5
       },
       "asserts": {
-        "passed": 55,
-        "total": 55
+        "passed": 52,
+        "total": 52
       },
       "failures": []
     },
@@ -224,19 +224,6 @@
       "asserts": {
         "passed": 195,
         "total": 195
-      },
-      "failures": []
-    },
-    {
-      "unit": "/test/modules/pear-full-square/mycelium-value-avro",
-      "ok": true,
-      "tests": {
-        "passed": 8,
-        "total": 8
-      },
-      "asserts": {
-        "passed": 57,
-        "total": 57
       },
       "failures": []
     },
@@ -313,8 +300,8 @@
         "total": 23
       },
       "asserts": {
-        "passed": 70,
-        "total": 70
+        "passed": 69,
+        "total": 69
       },
       "failures": []
     }
