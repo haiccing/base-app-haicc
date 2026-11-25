@@ -1,0 +1,11 @@
+# scene: the host in service by its commission, a node in it
+. boot/deploy host haiccing/base-component-haicc
+host boot/deploy node-1 haiccing/base-component-haicc
+# step: more in the request's log: its steps (verbose), read back from the request layer
+host crud/read . --flags log=verbose
+# expect: "uri":["main","."]
+host crud/read "done/*[value/value/action='read']" --flags layer=request
+# expect: "level":"verbose"
+# step: another layer read: the requests done
+. crud/read "done/*[value/value/protocol='boot']" --flags layer=request
+# expect: "protocol":"boot","action":"deploy"

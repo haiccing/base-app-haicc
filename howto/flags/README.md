@@ -8,16 +8,7 @@ the last command's, to the end of the line; after a URI followed by
 
 ## Steps
 
-```sh
-# more in the request's log
-haicc host crud/read . --flags log=verbose
-# a step's own: at the host, debug, for the hop and what follows
-haicc host --flags log=debug -- haicc node-1 crud/read .
-# another layer read: the requests done
-haicc . crud/read "done/*[value/value/protocol='boot']" --flags layer=request
-# into a container: the node deployed on its own haicc install there
-haicc host boot/deploy swarms/swarm-1/node-1 haiccing/base-component-haicc --flags container
-```
+The script, [steps.haicc](steps.haicc): each line as typed after `haicc`, what it answers under it; run with `howto/run`, shown here at info extraction.
 
 ## Notes
 

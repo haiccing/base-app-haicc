@@ -8,6 +8,8 @@ unpacked across lines to a width; `--raw` prints it as stored, one line;
 
 ## Steps
 
+**The terminal's own**: how the `haicc` command prints, not a request an mrepo answers: an `sh` procedure, no `steps.haicc` (a how-to's lines are requests).
+
 ```sh
 # the record whole, unpacked to the width
 haicc . info/get

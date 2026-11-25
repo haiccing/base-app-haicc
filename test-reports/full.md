@@ -1,6 +1,6 @@
 # Test report: haiccing/base-app-haicc
 
-The package passed its `full` set: all 25 units, 387 of 387 tests and 2738 of 2738 asserts.
+The package passed its `full` set: all 25 units, 389 of 389 tests and 2747 of 2747 asserts.
 
 | | |
 |---|---|
@@ -8,11 +8,11 @@ The package passed its `full` set: all 25 units, 387 of 387 tests and 2738 of 27
 | Set | `full` |
 | Result | passed |
 | Units | 25 of 25 passed |
-| Tests | 387 of 387 passed |
-| Asserts | 2738 of 2738 passed |
-| Run | 2026-11-25 04:11 UTC |
+| Tests | 389 of 389 passed |
+| Asserts | 2747 of 2747 passed |
+| Run | 2026-11-25 08:45 UTC |
 | Bare | v1.36.0 |
-| Content | `976ca7a6ce8b87e1fa23896e7a76eabbe56a54b2396cf5f711e6898bb31673b0` |
+| Content | `ce2bf06a1c8a89601b77f674c336bec2bd9b4619d84fc29e7e2745d47ae63e64` |
 
 ## Units
 
@@ -26,9 +26,9 @@ The package passed its `full` set: all 25 units, 387 of 387 tests and 2738 of 27
 | `/test/modules/pear-full-square/haicc-base-app` | passed | 18 of 18 | 196 of 196 |
 | `/test/modules/pear-full-square/mrepo-base-crud` | passed | 10 of 10 | 87 of 87 |
 | `/test/modules/pear-full-square/mrepo-base-execute` | passed | 10 of 10 | 98 of 98 |
-| `/test/modules/pear-full-square/mrepo-base-info` | passed | 10 of 10 | 86 of 86 |
+| `/test/modules/pear-full-square/mrepo-base-info` | passed | 11 of 11 | 92 of 92 |
 | `/test/modules/pear-full-square/mrepo-base-protocol` | passed | 3 of 3 | 10 of 10 |
-| `/test/modules/pear-full-square/mrepo-base-request` | passed | 21 of 21 | 261 of 261 |
+| `/test/modules/pear-full-square/mrepo-base-request` | passed | 22 of 22 | 263 of 263 |
 | `/test/modules/pear-full-square/mrepo-base-runtime` | passed | 10 of 10 | 177 of 177 |
 | `/test/modules/pear-full-square/mrepo-base-service` | passed | 3 of 3 | 19 of 19 |
 | `/test/modules/pear-full-square/mrepo-base-xpath` | passed | 9 of 9 | 97 of 97 |
@@ -42,6 +42,6 @@ The package passed its `full` set: all 25 units, 387 of 387 tests and 2738 of 27
 | `/test/modules/pear-full-square/p2p-mrepo` | passed | 34 of 34 | 171 of 171 |
 | `/test/modules/pear-full-square/p2p-replicate` | passed | 1 of 1 | 10 of 10 |
 | `/test/modules/pear-full-square/p2p-store` | passed | 5 of 5 | 20 of 20 |
-| `/test/modules/pear-full-square/pkgm-base-check` | passed | 26 of 26 | 89 of 89 |
+| `/test/modules/pear-full-square/pkgm-base-check` | passed | 26 of 26 | 90 of 90 |
 
 Written by the package's pre-release from `full.json`, beside it. The content is the hash of the bundle that was tested, its test reports left out.
