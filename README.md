@@ -24,10 +24,12 @@ bare base-app-haicc.bundle /run <argument>...
   without a leading slash: `.` is the local root, `host` the position
   `host` in it; `./sources` is a position named like one of haicc's own
   words. Go to this node
-  position and execute the command that follows. It is written as a
-  record into the boot mrepo's inbox folder; the response record is
-  printed whole, unpacked across lines. `--raw` before the URI prints it
-  as stored, `--output` the completed form's output alone.
+  position and execute the command that follows. It is asked as a
+  request, its line as typed, dropped into the boot mrepo's inbox
+  folder; what is returned is printed: what it says, then what is
+  attached, a line each; failed: on stderr, exit 1. `--request` before
+  the URI prints the whole request, its record unpacked across lines;
+  `--raw` the record as stored.
 - **A `<protocol>/<action>` without a URI** is the machine level, above
   the root mrepo: `haicc boot/deploy` puts the boot mrepo in place and
   starts its runtime; `haicc boot/teardown` stops every runtime and
@@ -76,12 +78,12 @@ The parts go as typed, unnamed; the mrepo interprets them.
   answer, an error: `1`.
 - `3`: something is missing: the boot mrepo, a package, a download.
 - `4`: no response in time.
-- `5`: a response with no completed form.
+- `5`: a response whose request is not returned.
 
 ## Environment
 
 `HAICC_HOME` and `HAICC_WORK` name haicc's own folder and the work
-folder; `HAICC_TIMEOUT`, `HAICC_RAW` and `HAICC_OUTPUT` set the wait
+folder; `HAICC_TIMEOUT`, `HAICC_RAW` and `HAICC_REQUEST` set the wait
 and the printing. The module's `main` documents each. The width a
 record is printed to is set with `haicc output`.
 
