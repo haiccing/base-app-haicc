@@ -27,7 +27,8 @@ bare base-app-haicc.bundle /run <argument>...
   position and execute the command that follows. It is asked as a
   request, its line as typed, dropped into the boot mrepo's inbox
   folder; what is returned is printed: what it says, then what is
-  attached, a line each; failed: on stderr, exit 1. `--request` before
+  attached, a line each, content of one of AVRO's own types shown
+  below its line; failed: on stderr, exit 1. `--request` before
   the URI prints the whole request, its record unpacked across lines;
   `--raw` the record as stored.
 - **A `<protocol>/<action>` without a URI** is the machine level, above
