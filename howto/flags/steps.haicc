@@ -1,6 +1,6 @@
 # scene: the host in service by its commission, a node in it
 . boot/deploy host haiccing/base-component-haicc
-host boot/deploy node-1 haiccing/base-component-haicc
+host boot/deploy peer-1 haiccing/base-component-haicc
 # step: more in the request's log: its steps (verbose), read back from the request layer
 host crud/read . --flags log=verbose
 # expect: "uri":["main","."]

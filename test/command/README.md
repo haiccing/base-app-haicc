@@ -16,8 +16,9 @@ runtime would. No runtime is started.
 - **Nothing booted**: a command for the mrepos and `boot/deploy` with
   no source holding the boot component, each said, exit 3;
   `boot/teardown` a repeat, a warning, exit 0; nothing written.
-- **`haicc sources`**: the list read with the folders first; `no-https`,
-  `https`, `unlink` and a download, with the list as written after.
+- **`haicc sources`**: the two lists read, the internal first, a line
+  not read said; `unlink` from either; `https` and `no-https` gone; a
+  download, with the lists as written after.
 - **A command's record, value by value**: the envelope addressed to the
   root's inbox, around a request: its line as typed, who asks, its
   answer back to the terminal; plain at the root, the `haicc` command elsewhere; a

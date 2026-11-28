@@ -55,7 +55,8 @@ test('the usage: every form of the command line, printed; exit 0', async (t) => 
     const r = asked('usage', await haicc(a))
     t.alike([r.code, r.out, r.err], [0, USAGE + '\n', ''], `haicc ${a.join(' ')}`)
   }
-  for (const form of ['haicc <URI> <protocol>/<action> <argument>...', 'haicc --raw <URI>', 'haicc --request <URI>', 'haicc boot/deploy', 'haicc boot/teardown', 'haicc sources', 'haicc sources unlink <folder>', 'haicc sources download <org>...', 'haicc sources https | no-https [<org>...]']) t.ok(USAGE.includes(form), `in it: ${form}`)
+  for (const form of ['haicc <URI> <protocol>/<action> <argument>...', 'haicc --raw <URI>', 'haicc --request <URI>', 'haicc boot/deploy', 'haicc boot/teardown', 'haicc sources', 'haicc sources unlink <folder>|<source>', 'haicc sources download <org>...']) t.ok(USAGE.includes(form), `in it: ${form}`)
+  t.absent(USAGE.includes('https |'), 'https and no-https: gone from it')
 })
 
 test('not a command: exit 2, said on stderr, nothing printed', async (t) => {
@@ -69,7 +70,9 @@ test('not a command: exit 2, said on stderr, nothing printed', async (t) => {
     [['boot/deploy', 'host'], 'haicc: haicc boot/deploy (no arguments)'],
     [['--request'], 'haicc: --request goes before a URI'],
     [['--raw'], 'haicc: --raw goes before a URI'],
-    [['sources', 'link', '/x'], 'haicc: haicc sources [unlink <folder> | download <org>... | https [<org>...] | no-https [<org>...]]']
+    [['sources', 'link', '/x'], 'haicc: haicc sources [unlink <folder>|<source> | download <org>...]'],
+    [['sources', 'https'], 'haicc: haicc sources [unlink <folder>|<source> | download <org>...]'],
+    [['sources', 'no-https'], 'haicc: haicc sources [unlink <folder>|<source> | download <org>...]']
   ]) {
     const r = await haicc(a)
     t.alike([r.code, r.out, r.err], [2, '', said + '\n'], `haicc ${a.join(' ')}`)
@@ -82,26 +85,28 @@ test('nothing booted: said, exit 3 (the teardown a repeat, a warning, exit 0), n
   r = asked('boot/teardown', await haicc(['boot/teardown']))
   t.alike([r.code, r.out, r.err], [0, `Nothing to tear down at ${work}: no boot mrepo there.\n`, `haicc: warning: no boot mrepo at ${work}: nothing to tear down\n`], 'haicc boot/teardown: idempotent, a repeat, its warning on stderr')
   r = asked('boot/deploy', await haicc(['boot/deploy']))
-  t.alike([r.code, r.out, r.err], [3, '', `haicc: no ${CONFIG.org}/${CONFIG.boot}.bundle in the sources (haicc sources link <folder>)\n`], 'haicc boot/deploy, no source holding the boot component')
+  t.alike([r.code, r.out, r.err], [3, '', `haicc: no ${CONFIG.org}/${CONFIG.boot}.bundle in the sources: the platform reads local folders only (haicc sources download ${CONFIG.org}, or haicc sources link <folder>)\n`], 'haicc boot/deploy, no source holding the boot component')
   r = await haicc(['.', 'info/get'], { env: { HAICC_WORK: join(home, 'elsewhere') } })
   t.alike([r.code, r.err], [3, `haicc: no boot mrepo at ${join(home, 'elsewhere')} (haicc boot/deploy)\n`], 'HAICC_WORK: another work folder')
   t.alike(readdirSync(home), [], 'nothing written')
 })
 
-test('haicc sources: the list in its own folder, read and changed', async (t) => {
+test('haicc sources: the two lists in its own folder, read and changed', async (t) => {
   mkdirSync(join(home, 'src'))
   writeFileSync(join(home, 'sources.list'), `github:${CONFIG.org}\nfolder:${join(home, 'src')}\n`)
+  writeFileSync(join(home, 'external.list'), 'github:splectral\n')
+  const stray = `github:${CONFIG.org} (in sources.list, not read: the install reads folders only)`
   let r = asked('sources', await haicc(['sources']))
-  t.alike([r.code, r.out], [0, `folder:${join(home, 'src')}\ngithub:${CONFIG.org}\n`], 'haicc sources: the folders first, https after')
-  r = await haicc(['sources', 'no-https'])
-  t.alike([r.code, r.out], [0, `folder:${join(home, 'src')}\n`], 'no-https: the backup off')
-  r = await haicc(['sources', 'https'])
-  t.alike([r.code, r.out], [0, `folder:${join(home, 'src')}\ngithub:${CONFIG.org}\n`], 'https: back on')
+  t.alike([r.code, r.out], [0, `folder:${join(home, 'src')}\ngithub:splectral\n${stray}\n`], 'haicc sources: the internal, the external, a line not read said')
+  r = await haicc(['sources', 'unlink', `github:${CONFIG.org}`])
+  t.alike([r.code, r.out], [0, `folder:${join(home, 'src')}\ngithub:splectral\n`], 'unlink: the line not read, off the internal list')
   r = await haicc(['sources', 'download', CONFIG.org])
   t.alike([r.code, r.out, r.err], [3, '', `haicc: ${CONFIG.org}: fetched before the app (haicc sources download ${CONFIG.org})\n`], 'download: an organisation, the first step\'s, not the app\'s: exit 3')
   r = await haicc(['sources', 'unlink', join(home, 'src')])
-  t.alike([r.code, r.out], [0, `github:${CONFIG.org}\n`], 'unlink')
-  t.is(readFileSync(join(home, 'sources.list'), 'utf8'), `github:${CONFIG.org}\n`, 'the list written')
+  t.alike([r.code, r.out], [0, 'github:splectral\n'], 'unlink: a folder')
+  r = await haicc(['sources', 'unlink', 'github:splectral'])
+  t.alike([r.code, r.out], [0, ''], 'unlink: an external source')
+  t.alike([readFileSync(join(home, 'sources.list'), 'utf8'), readFileSync(join(home, 'external.list'), 'utf8')], ['', ''], 'the lists written')
 })
 
 test('a command for the mrepos: its record in the root\'s inbox, value by value', async (t) => {
@@ -117,9 +122,9 @@ test('a command for the mrepos: its record in the root\'s inbox, value by value'
   t.alike([record.value.command, record.value.from, record.value.to, record.value.reply, record.value.form, record.value.returned], ['boot/deploy host haiccing/base-component-haicc', 'terminal', CONFIG.root.uri, '/haicc/terminal', null, null], 'its value a request: at the root the command plain, its line as typed; who asks, the mrepo it is for, its answer back to the terminal')
 
   a = answer({ message: 'Done.' })
-  r = await haicc(['host', 'haicc', 'node-1', 'info/get', '.', 'packages', 'no "such" section'])
+  r = await haicc(['host', 'haicc', 'peer-1', 'info/get', '.', 'packages', 'no "such" section'])
   ;({ record } = await a)
-  t.is(record.value.command, 'haicc host haicc node-1 info/get . packages "no \\"such\\" section"', 'anywhere else the haicc command as it is: chained, an argument with spaces and quotes one word of its line')
+  t.is(record.value.command, 'haicc host haicc peer-1 info/get . packages "no \\"such\\" section"', 'anywhere else the haicc command as it is: chained, an argument with spaces and quotes one word of its line')
 
   a = answer({ message: 'Done.' })
   r = await haicc(['/run', 'service/start'])

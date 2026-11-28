@@ -41,8 +41,9 @@ bare base-app-haicc.bundle /run <argument>...
   an mrepo it is in; the user's by name. `haicc
   <URI> haicc/file <URI> <name>` reads one here and sends its lines as
   `haicc/script`, to run where its URI points.
-- **`haicc sources`** lists the sources registered; `unlink`, `https`,
-  `no-https` and `download` change them.
+- **`haicc sources`** lists the sources registered: the install's
+  folders (`sources.list`), then where each download came from
+  (`external.list`, a record); `unlink` takes one off its list.
 - **`haicc --help`** prints the forms, with examples.
 
 ## Record

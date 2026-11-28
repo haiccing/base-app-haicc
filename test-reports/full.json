@@ -1,8 +1,8 @@
 {
   "package": "haiccing/base-app-haicc",
-  "content": "4d33cac329cb3ea415546f2ef634f79e08997dbd9b08a15c9e79aa229973fd32",
+  "content": "791965c7ac808e816ac017779344240846a5eaf4ca17e8313064b1f8efa4dafc",
   "bare": "v1.36.0",
-  "date": "2026-11-28T00:21:10.551Z",
+  "date": "2026-11-28T08:35:21.154Z",
   "set": "full",
   "ok": true,
   "units": [
@@ -14,8 +14,8 @@
         "total": 8
       },
       "asserts": {
-        "passed": 62,
-        "total": 62
+        "passed": 64,
+        "total": 64
       },
       "failures": []
     },
@@ -75,8 +75,8 @@
       "unit": "/test/modules/pear-full-square/haicc-base-app",
       "ok": true,
       "tests": {
-        "passed": 18,
-        "total": 18
+        "passed": 19,
+        "total": 19
       },
       "asserts": {
         "passed": 187,
@@ -105,8 +105,8 @@
         "total": 11
       },
       "asserts": {
-        "passed": 93,
-        "total": 93
+        "passed": 92,
+        "total": 92
       },
       "failures": []
     },
@@ -211,19 +211,6 @@
       "asserts": {
         "passed": 16,
         "total": 16
-      },
-      "failures": []
-    },
-    {
-      "unit": "/test/modules/pear-full-square/mycelium-value-avro",
-      "ok": true,
-      "tests": {
-        "passed": 8,
-        "total": 8
-      },
-      "asserts": {
-        "passed": 57,
-        "total": 57
       },
       "failures": []
     },
